@@ -45,6 +45,7 @@ def string_check(question, valid_ans_list):
 
 
 def instructions():
+    '''Prints instructions'''
     print('''
 
 ---Instructions---
@@ -65,6 +66,8 @@ def cipher_func(mode):
     result = ''
 
     if mode == "encrypt":
+        # Get plain text, and save it,
+        # and get shift amount (between 0 and 26) using int_check func
         text = input("Plain text: ")
         print()
         shift = int_check("Shift amount: ")
@@ -72,6 +75,7 @@ def cipher_func(mode):
         un_encrypted_messages.append(text)
 
     elif mode == 'decrypt':
+        # Get cipher text and save it
         text = input("Cipher Text: ")
         decrypted_messages = ""
         print()
@@ -110,18 +114,19 @@ def cipher_func(mode):
             else:
                 result += char
 
-        # Save results
+        # For decrypt, decrease shift and go again until shift is zero, save all results
         if mode == 'decrypt':
             print(f"Shift {26-shift}: {result}")
             decrypted_messages += result + ', '
             result = ""
             shift -= 1
-            
+        # For encrypt, break function, save result
         if mode == 'encrypt':
             print(f"Encrypted Text: {result}\n")
             encrypted_messages.append(result)
             break
 
+    # Save decrypt results to list
     if mode == 'decrypt':
         decrypted_messages = decrypted_messages[:-2]
         decrypted_messages_lists.append(decrypted_messages)
@@ -166,15 +171,20 @@ while True:
 # Show history (if avaliable)
 if len(un_encrypted_messages) > 0:
 
+    # Encrypted Messages Heading
     print("---Encrypted Messages---\n")
 
+    # Print each unencrypted message with its encrypted version
     for item in un_encrypted_messages:
         index = un_encrypted_messages.index(item)
         print(f'{item} --> {encrypted_messages[index]}\n')
 
 if len(un_decrypted_messages) > 0:
+
+    # Decrypted Messages Heading
     print("---Decrypted Messages---\n")
 
+    # Print each undecrypted message with all of its possible solutions
     for item in un_decrypted_messages:
         index = un_decrypted_messages.index(item)
         print(f'{item}: \n\n{decrypted_messages_lists[index]}\n')
