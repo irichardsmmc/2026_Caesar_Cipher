@@ -100,6 +100,7 @@ while True:
         shift = int_check("Shift amount: ")
         print()
         encode(text, shift)
+        print()
 
     else:
         text = input("Cipher Text: ")
@@ -108,6 +109,7 @@ while True:
         shift = int_check("Shift amount: ")
         print()
         decode(text, shift)
+        print()
 
 
 # end of main loop
