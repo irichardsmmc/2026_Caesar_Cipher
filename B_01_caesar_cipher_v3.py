@@ -75,6 +75,7 @@ def cipher_func(mode):
         shift = int_check("Shift amount: ")
         print()
         un_encrypted_messages.append(text)
+        shift_list.append(shift)
 
     elif mode == 'decrypt':
         # Get cipher text and save it
@@ -143,6 +144,7 @@ un_encrypted_messages = []
 encrypted_messages = []
 un_decrypted_messages = []
 decrypted_messages_lists = []
+shift_list = []
 
 # Program heading
 print("\n=== Caesar Cipher Encrypter & Decrypter ===\n")
@@ -163,6 +165,7 @@ while True:
     mode = string_check("Encrypt or Decrypt? ", ['encrypt', 'decrypt', 'xxx'])
     print()
 
+    # If user enters 'xxx', end loop
     if mode == 'xxx':
         break
 
@@ -170,6 +173,7 @@ while True:
 
 # End of cipher loop
 
+# Headings to write to file, get ready to save the history
 encrypt_heading = "---Encrypted Messages---"
 decrypt_heading = "---Decrypted Messages---"
 encrypt_data = ""
@@ -181,11 +185,11 @@ if len(un_encrypted_messages) > 0:
     # Encrypted Messages Heading
     print(encrypt_heading)
 
-    # Print each unencrypted message with its encrypted version
+    # Print each unencrypted message with its encrypted version, save data
     for item in un_encrypted_messages:
         index = un_encrypted_messages.index(item)
-        print(f'{item} --> {encrypted_messages[index]}')
-        encrypt_data += f'{item} --> {encrypted_messages[index]}'
+        print(f'Plain text: {item}   Shift amount: {shift_list[index]}   Cipher text: {encrypted_messages[index]}')
+        encrypt_data += f'Plain text: {item}   Shift amount: {shift_list[index]}   Cipher text: {encrypted_messages[index]}'
     
     print()
 
